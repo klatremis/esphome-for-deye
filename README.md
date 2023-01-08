@@ -4,10 +4,7 @@ For use with ESP32 & TTL To RS485 Module with automatic flow control.
 I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
 
 This include all addresses i could see relevant from the inverter. 
-Including:
--Changing time of use
--Charge/discharge amps
-etc.
+Including Changing time of use, Charge/discharge amps etc.
 
 The battery input is commited out as im having a separate rs485 reader for that.
 
