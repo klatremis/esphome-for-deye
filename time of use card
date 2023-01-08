@@ -1,0 +1,98 @@
+type: entities
+entities:
+  - entity: switch.sun12k_time_point_1_charge_enable
+    type: custom:multiple-entity-row
+    name: Timeslot 1
+    toggle: true
+    state_header: Charge
+    state_color: true
+    entities:
+      - entity: number.sun12k_time_point_1_start
+        name: From
+        format: precision0
+      - entity: number.sun12k_time_point_2_start
+        name: To
+        format: precision0
+      - entity: number.sun12k_time_point_1_capacity
+        name: SOC
+        format: precision0
+  - entity: switch.sun12k_time_point_2_charge_enable
+    type: custom:multiple-entity-row
+    name: Timeslot 2
+    toggle: true
+    state_header: Charge
+    state_color: true
+    entities:
+      - entity: number.sun12k_time_point_2_start
+        name: From
+        format: precision0
+      - entity: number.sun12k_time_point_3_start
+        name: To
+        format: precision0
+      - entity: number.sun12k_time_point_2_capacity
+        name: SOC
+        format: precision0
+  - entity: switch.sun12k_time_point_3_charge_enable
+    type: custom:multiple-entity-row
+    name: Timeslot 3
+    toggle: true
+    state_header: Charge
+    state_color: true
+    entities:
+      - entity: number.sun12k_time_point_3_start
+        name: From
+        format: precision0
+      - entity: number.sun12k_time_point_4_start
+        name: To
+        format: precision0
+      - entity: number.sun12k_time_point_3_capacity
+        name: SOC
+        format: precision0
+  - entity: switch.sun12k_time_point_4_charge_enable
+    type: custom:multiple-entity-row
+    name: Timeslot 4
+    toggle: true
+    state_header: Charge
+    state_color: true
+    entities:
+      - entity: number.sun12k_time_point_4_start
+        name: From
+        format: precision0
+      - entity: number.sun12k_time_point_5_start
+        name: To
+        format: precision0
+      - entity: number.sun12k_time_point_4_capacity
+        name: SOC
+        format: precision0
+  - entity: switch.sun12k_time_point_5_charge_enable
+    type: custom:multiple-entity-row
+    name: Timeslot 5
+    toggle: true
+    state_header: Charge
+    state_color: true
+    entities:
+      - entity: number.sun12k_time_point_5_start
+        name: From
+        format: precision0
+      - entity: number.sun12k_time_point_6_start
+        name: To
+        format: precision0
+      - entity: number.sun12k_time_point_5_capacity
+        name: SOC
+        format: precision0
+  - entity: switch.sun12k_time_point_6_charge_enable
+    type: custom:multiple-entity-row
+    name: Timeslot 6
+    toggle: true
+    state_header: Charge
+    state_color: true
+    entities:
+      - entity: number.sun12k_time_point_6_start
+        name: From
+        format: precision0
+      - entity: number.sun12k_time_point_1_start
+        name: To
+        format: precision0
+      - entity: number.sun12k_time_point_6_capacity
+        name: SOC
+        format: precision0
