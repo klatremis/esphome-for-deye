@@ -1,6 +1,9 @@
 # esphome-for-deye
-For use with ESP32 & TTL To RS485 Module with automatic flow control.
+Made for Deye SUN-12K-SG04LP3
+I guess it also works for SUN-5/6/8/10/-SG04LP3 as the modbus adresses is most likely the same.
+For other models & sunsync. Edit the modbus adresses and it should work if the adresses exist in your inverter.
 
+For use with ESP32 & TTL To RS485 Module with automatic flow control.
 I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
 
 This include all addresses i could see relevant from the inverter. 
