@@ -1,5 +1,5 @@
 substitutions:
-  name: deye12k
+  name: deye12
   device_description: "Esphome component for Deye sun-12k-sg04lp3"
   modbus_controller_id: sg04lp3
 
@@ -70,7 +70,7 @@ switch:
     entity_category: config
     icon: "mdi:toggle-switch"
  
-  - platform: modbus_controller
+  - platform: modbus_controller  # Advanced peak shaving and valley filling function enabled
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: sun12k-Time of Use 
@@ -87,7 +87,7 @@ switch:
     name: sun12k-Time point 1 charge enable
     register_type: holding
     address: 172
-    bitmask: 1   # 2 for gen
+    bitmask: 1   # 2 hvis man ønsker Gen charging enabel i sted for.
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -97,7 +97,7 @@ switch:
     name: sun12k-Time point 2 charge enable
     register_type: holding
     address: 173
-    bitmask: 1    # 2 for gen
+    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -107,7 +107,7 @@ switch:
     name: sun12k-Time point 3 charge enable
     register_type: holding
     address: 174
-    bitmask: 1    # 2 for gen
+    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -117,7 +117,7 @@ switch:
     name: sun12k-Time point 4 charge enable
     register_type: holding
     address: 175
-    bitmask: 1    # 2 for gen
+    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -127,7 +127,7 @@ switch:
     name: sun12k-Time point 5 charge enable
     register_type: holding
     address: 176
-    bitmask: 1    # 2 for gen
+    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -137,7 +137,7 @@ switch:
     name: sun12k-Time point 6 charge enable
     register_type: holding
     address: 177
-    bitmask: 1    # 2 for gen
+    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -176,7 +176,7 @@ binary_sensor:
  
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
-     name: sun12k-Turn off/on status #The lower 4 bits represent the switch signal
+     name: sun12k-Turn off/on status   #The lower 4 bits represent the switch signal
      id: sun12k_Turn_off_on_status
      register_type: holding
      address: 551
@@ -284,7 +284,53 @@ number:
     modbus_controller_id: ${modbus_controller_id}
     id: sun12k_Time_point_1_power
     name: "sun12k-Time point 1 power"
+    unit_of_measurement: W
     address: 154
+    value_type: U_WORD
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_Time_point_2_power
+    name: "sun12k-Time point 2 power"
+    unit_of_measurement: W
+    address: 155
+    value_type: U_WORD
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_Time_point_3_power
+    name: "sun12k-Time point 3 power"
+    unit_of_measurement: W
+    address: 156
+    value_type: U_WORD
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_Time_point_4_power
+    name: "sun12k-Time point 4 power"
+    unit_of_measurement: W
+    address: 157
+    value_type: U_WORD
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_Time_point_5_power
+    name: "sun12k-Time point 5 power"
+    unit_of_measurement: W
+    address: 158
+    value_type: U_WORD
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_Time_point_6_power
+    name: "sun12k-Time point 6 power"
+    unit_of_measurement: W
+    address: 159
     value_type: U_WORD
 
   - platform: modbus_controller
@@ -359,7 +405,7 @@ number:
     value_type: U_WORD
 
 sensor:
-  - platform: modbus_controller
+  - platform: modbus_controller #sun12k-køleplade temeratur
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-Heat sink temperature"
     id: sun12k_koleplade_temeratur
@@ -372,7 +418,7 @@ sensor:
       - offset: -1000
       - multiply:  0.1
  
-  - platform: modbus_controller
+  - platform: modbus_controller #sun12k-load frequency
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-load frequency"
     id: sun12k_load_frequency
@@ -385,7 +431,7 @@ sensor:
       - multiply: 0.01
     value_type: U_WORD
  
-  - platform: modbus_controller
+  - platform: modbus_controller #sun12k-inverter-frequency
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-inverter-frequency"
     id: sun12k_inverter_frequency
@@ -488,7 +534,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Total PV Production"
+    name: "sun12k-Total PV Production"  #Cumulative Production 
     id: sun12k_Total_PV_Production
     register_type: holding
     address: 534
@@ -502,7 +548,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Total Grid Power"
+    name: "sun12k-Total Grid Power"   # Grid side total power
     id: sun12k_Total_Grid_Power
     register_type: holding
     address: 625
@@ -707,7 +753,7 @@ sensor:
     accuracy_decimals: 0
     value_type: S_WORD  
  
-  - platform: modbus_controller
+  - platform: modbus_controller  # Grid internal - total active power
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-Internal total Power" 
     id: sun12k_Internal_total_Power
@@ -907,8 +953,6 @@ sensor:
     filters:
       - multiply: 0.1
  
- # ----For batterys----
- 
   # - platform: modbus_controller
   #   modbus_controller_id: ${modbus_controller_id}
   #   name: "sun12k-battery temperature"
@@ -979,4 +1023,4 @@ sensor:
   #   unit_of_measurement: "Ah"
   #   state_class: "measurement"
   #   accuracy_decimals: 0
-  # value_type: U_WORD
+    # value_type: U_WORD
