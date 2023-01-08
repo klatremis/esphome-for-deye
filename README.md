@@ -9,4 +9,9 @@ Including:
 -Charge/discharge amps
 etc.
 
+The battery input is commited out as im having a separate rs485 reader for that.
+
 ![esp32 rs485_bb](https://user-images.githubusercontent.com/22115157/211201233-f5fe9189-e6b3-4ee1-9baa-48068f078127.jpg)
+
+![image](https://user-images.githubusercontent.com/22115157/211201343-1d54cada-4b2c-40b0-88c4-faf31e17fead.png)
+
