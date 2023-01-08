@@ -1,7 +1,7 @@
-# esphome-for-deye
-Esphome component for Deye sun-12k-sg04lp3 to implement into home assistant
-
+# esphome-for-deyeo
 For use with ESP32 & TTL To RS485 Module with automatic flow control.
+
+I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
 
 This include all addresses i could see relevant from the inverter. 
 Including:
