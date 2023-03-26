@@ -539,7 +539,7 @@ sensor:
     register_type: holding
     address: 534
     unit_of_measurement: "kWh"
-    state_class: "measurement"
+    state_class: "total_increasing"
     device_class: energy
     accuracy_decimals: 1
     value_type: U_DWORD_R
