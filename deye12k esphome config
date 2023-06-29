@@ -231,6 +231,15 @@ number:
     unit_of_measurement: A
     value_type: U_WORD
 
+- platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_max_solar_sell_power
+    name: "sun12k-Max Solar Sell Power"
+    unit_of_measurement: W
+    address: 143
+    value_type: U_WORD
+
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
@@ -402,6 +411,15 @@ number:
     address: 171
     min_value: 0
     max_value: 100
+    value_type: U_WORD
+
+- platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: sun12k_max_solar_power
+    name: "sun12k-Max Solar Power"
+    unit_of_measurement: W
+    address: 340
     value_type: U_WORD
 
 sensor:
