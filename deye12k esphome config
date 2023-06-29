@@ -117,7 +117,7 @@ switch:
     name: sun12k-Time point 4 charge enable
     register_type: holding
     address: 175
-    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
+    bitmask: 1
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -127,7 +127,7 @@ switch:
     name: sun12k-Time point 5 charge enable
     register_type: holding
     address: 176
-    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
+    bitmask: 1
     entity_category: config
     icon: "mdi:toggle-switch"
  
@@ -137,13 +137,14 @@ switch:
     name: sun12k-Time point 6 charge enable
     register_type: holding
     address: 177
-    bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
+    bitmask: 1
     entity_category: config
     icon: "mdi:toggle-switch"
  
 binary_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
+     skip_updates: 2
      name: sun12k-AC INV relay # bit 0
      id: sun12k_AC_INV_relay
      register_type: holding
@@ -152,6 +153,7 @@ binary_sensor:
  
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
+     skip_updates: 2
      name: sun12k-AC Load relay Reserved # bit 1
      id: sun12k_AC_Load_relay_Reserved
      register_type: holding
@@ -160,6 +162,7 @@ binary_sensor:
  
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
+     skip_updates: 2
      name: sun12k-AC grid relay # bit 2
      id: sun12k_AC_grid_relay
      register_type: holding
@@ -168,6 +171,7 @@ binary_sensor:
  
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
+     skip_updates: 2
      name: sun12k-AC Generator relay # bit 3
      id: sun12k_AC_Generator_relay
      register_type: holding
@@ -176,7 +180,8 @@ binary_sensor:
  
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
-     name: sun12k-Turn off/on status   #The lower 4 bits represent the switch signal
+     skip_updates: 2
+     name: sun12k-Turn off/on status
      id: sun12k_Turn_off_on_status
      register_type: holding
      address: 551
@@ -185,6 +190,7 @@ binary_sensor:
 text_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
+     skip_updates: 2
      id: sun12k_Running_Status
      bitmask: 0
      register_type: holding
@@ -411,6 +417,7 @@ number:
     address: 171
     min_value: 0
     max_value: 100
+    step: 5
     value_type: U_WORD
 
 - platform: modbus_controller
@@ -423,7 +430,7 @@ number:
     value_type: U_WORD
 
 sensor:
-  - platform: modbus_controller #sun12k-køleplade temeratur
+  - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-Heat sink temperature"
     id: sun12k_koleplade_temeratur
@@ -436,7 +443,7 @@ sensor:
       - offset: -1000
       - multiply:  0.1
  
-  - platform: modbus_controller #sun12k-load frequency
+  - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-load frequency"
     id: sun12k_load_frequency
@@ -449,7 +456,7 @@ sensor:
       - multiply: 0.01
     value_type: U_WORD
  
-  - platform: modbus_controller #sun12k-inverter-frequency
+  - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     name: "sun12k-inverter-frequency"
     id: sun12k_inverter_frequency
@@ -578,6 +585,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 10
     name: "sun12k-Daily Energy Bought"
     id: sun12k_Daily_Energy_Bought
     register_type: holding
@@ -592,6 +600,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 10
     name: "sun12k-Daily Energy Sold"
     id: sun12k_Daily_Energy_Sold
     register_type: holding
@@ -606,6 +615,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 10
     name: "sun12k-Total Energy Bought"
     id: sun12k_Total_Energy_Bought
     register_type: holding
@@ -620,6 +630,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 10
     name: "sun12k-Total Energy Sold"
     id: sun12k_Total_Energy_Sold
     register_type: holding
@@ -634,6 +645,7 @@ sensor:
  
   - platform: modbus_controller #Total Consumption
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 10
     name: "sun12k-Total Consumption"
     id: sun12k_Total_Consumption
     register_type: holding
@@ -648,6 +660,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 10
     name: "sun12k-active power generation of today"
     id: sun12k_active_power_generation_of_today
     register_type: holding
@@ -662,6 +675,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Grid Current L1"
     id: sun12k_Grid_Current_L1
     register_type: holding
@@ -675,6 +689,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Grid Current L2"
     id: sun12k_Grid_Current_L2
     register_type: holding
@@ -688,6 +703,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Grid Current L3"
     id: sun12k_Grid_Current_L3
     register_type: holding
@@ -701,6 +717,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Grid Voltage L1"
     id: sun12k_Grid_Voltage_L1
     register_type: holding
@@ -714,6 +731,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Grid Voltage L2"
     id: sun12k_Grid_Voltage_L2
     register_type: holding
@@ -727,6 +745,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Grid Voltage L3"
     id: sun12k_Grid_Voltage_L3
     register_type: holding
@@ -741,6 +760,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Internal CT L1 Power"
     id: sun12k_Internal_CT_L1_Power
     register_type: holding
@@ -752,6 +772,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Internal CT L2 Power"
     id: sun12k_Internal_CT_L2_Power
     register_type: holding
@@ -763,6 +784,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Internal CT L3 Power"
     id: sun12k_Internal_CT_L3_Power
     register_type: holding
@@ -772,8 +794,9 @@ sensor:
     accuracy_decimals: 0
     value_type: S_WORD  
  
-  - platform: modbus_controller  # Grid internal - total active power
+  - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Internal total Power" 
     id: sun12k_Internal_total_Power
     register_type: holding
@@ -785,6 +808,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-External CT L1 Power"
     id: sun12k_External_CT_L1_Power
     register_type: holding
@@ -796,6 +820,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-External CT L2 Power"
     id: sun12k_External_CT_L2_Power
     register_type: holding
@@ -807,6 +832,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-External CT L3 Power"
     id: sun12k_External_CT_L3_Power
     register_type: holding
@@ -840,6 +866,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Warning1"
     id:  sun12k_Warning1
     register_type: holding
@@ -849,6 +876,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Warning2"
     id:  sun12k_Warning2
     register_type: holding
@@ -858,6 +886,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Warning3"
     id:  sun12k_Warning3
     register_type: holding
@@ -867,6 +896,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Error1"
     id:  sun12k_Error1
     register_type: holding
@@ -876,6 +906,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Error2"
     id:  sun12k_Error2
     register_type: holding
@@ -885,6 +916,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-Error3"
     id:  sun12k_Error3
     register_type: holding
@@ -894,25 +926,13 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+
     name: "sun12k-Failure status of communication board"
     id:  sun12k_Failure_status_of_communication_board
     register_type: holding
     address: 548
     accuracy_decimals: 0
     value_type: U_WORD
- 
-  - platform: modbus_controller
-    modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Minimum insulation impedance"
-    id:  sun12k_Minimum_insulation_impedance
-    register_type: holding
-    unit_of_measurement: "kΩ"
-    state_class: "measurement"
-    address: 65
-    accuracy_decimals: 0
-    value_type: U_WORD
-    filters:
-      - multiply: 0.1
  
   # Battery
   - platform: modbus_controller
@@ -973,6 +993,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
+    skip_updates: 2
     name: "sun12k-battery capacity"
     id: sun12k_battery_capacity
     register_type: holding
