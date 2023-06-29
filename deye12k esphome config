@@ -552,12 +552,13 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Total PV Production"  #Cumulative Production 
+    name: "sun12k-Total PV Production"
     id: sun12k_Total_PV_Production
     register_type: holding
     address: 534
+    skip_updates: 10
     unit_of_measurement: "kWh"
-    state_class: "measurement"
+    state_class: "total_increasing"
     device_class: energy
     accuracy_decimals: 1
     value_type: U_DWORD_R
