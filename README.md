@@ -1,15 +1,48 @@
-# esphome-for-deye
-Made for Deye SUN-12K-SG04LP3.
-I guess it also works for SUN-5/6/8/10/-SG04LP3 as the modbus adresses is most likely the same.
-For other models & sunsync. I cant support those as they use other addresses and the "modbus" interface in the inverter is different.
+# ESPhome for deye
+ESPhome configuration for monitoring and control of Deye inverters in Home Assistant.
+This include all addresses i could see relevant from the inverter.
+![image](https://user-images.githubusercontent.com/22115157/211201343-1d54cada-4b2c-40b0-88c4-faf31e17fead.png)
 
-For use with ESP32 & TTL To RS485 Module with automatic flow control.
+## Supported devices
+Made specially for Deye 3phase low voltage inverters
+* SUN-12K-SG04LP3(confirmed)
+* SUN-8K-SG04LP3
+* SUN-6K-SG04LP3
+* SUN-5K-SG04LP3
+
+## Unsupported devices
+Sunsync & other 1phase inverters as they use different addresses and have different modbus port. Those inverters are not allowed in Denmark where i live because of a rule of maximum 16A for 1phase equitment.
+I can only refer to this powerforum thread. https://powerforum.co.za/topic/8646-my-sunsynk-8kw-data-collection-setup/
+
+## Requirements
+* ESP32
+* TTL To RS485 Module with automatic flow control
+
+## Installation
+1. Create your esp32 in esphome in home assistant
+2. Upload the your basis config via. usb from pc.
+3. Test wireless upload
+4. Copy all content (make sure you have your wifi ssid&password in the secrets)
+5. Edit the sensors in the config if you like
+6. Upload wireless
+
+## Hardware diagram
+RX / TX between esp and ttl converter way have to be swapped. This seems to be a little different from espboard to espboard.
+If it dosent communicate(RX/TX led both blinking) Try swap rx/tx on the esp.
+
 I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
-
-This include all addresses i could see relevant from the inverter. 
-Including Changing time of use, Charge/discharge amps etc.
+(BE AWARE THAT IF YOU POWER OFF THE INVERTER REMOTELY, YOU CANT POWER IT UP AGAIN REMOTELY AS THE POWER TO THE ESP IS GONE)
 
 ![esp32 rs485_bb](https://user-images.githubusercontent.com/22115157/211201233-f5fe9189-e6b3-4ee1-9baa-48068f078127.jpg)
 
-![image](https://user-images.githubusercontent.com/22115157/211201343-1d54cada-4b2c-40b0-88c4-faf31e17fead.png)
+## Home assistant user interfase
+For the card i use for the time of use settings like the inverters interface. Use the add-on "multiple entity row" from HACS and inspiration from my configuration of it below.
+* https://github.com/klatremis/esphome-for-deye/blob/main/time%20of%20use%20card
+
+## Automation
+[@Alphaemef](https://gist.github.com/Alphaemef)
+ has made some awesome automations for the inverter/system in Home Assistant
+* Tesla charging automation - An automation/script that adjust the charge current the solar production. [Tesla automation](https://gist.github.com/Alphaemef/70f203cc6a5acb75d987ae88d9be2edf)
+* Solar Inverter Suite V2 - Can sell the battery stored energy, turn off selling when sell price is too low, optimize the economic for charging and selling according the nordpool prices. [Solar Inverter Suite, Basic Automations V2](https://gist.github.com/Alphaemef/71876e8ac4bf86a1db3d4148ba2d1a32)
+
 
