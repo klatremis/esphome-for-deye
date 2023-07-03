@@ -2,6 +2,7 @@ substitutions:
   name: deye12
   device_description: "Esphome component for Deye sun-12k-sg04lp3"
   modbus_controller_id: sg04lp3
+  device_type: sun12k
 
 esphome:
   name: ${name}
@@ -53,7 +54,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k_Solar_sell
+    name: ${device_type}_Solar_sell
     register_type: holding
     address: 145
     bitmask: 1
@@ -63,7 +64,7 @@ switch:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Grid_Charge
+    name: ${device_type}-Grid_Charge
     register_type: holding
     address: 130
     bitmask: 1
@@ -73,8 +74,8 @@ switch:
   - platform: modbus_controller  # Advanced peak shaving and valley filling function enabled
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time of Use 
-    id: sun12k_Time_of_Use
+    name: ${device_type}-Time of Use 
+    id: ${device_type}_Time_of_Use
     register_type: holding
     address: 146
     bitmask: 1
@@ -84,7 +85,7 @@ switch:
   - platform: modbus_controller  # Time point 1 charge enable - grid charging enable
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time point 1 charge enable
+    name: ${device_type}-Time point 1 charge enable
     register_type: holding
     address: 172
     bitmask: 1   # 2 hvis man ønsker Gen charging enabel i sted for.
@@ -94,7 +95,7 @@ switch:
   - platform: modbus_controller  # Time point 2 charge enable - grid charging enable
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time point 2 charge enable
+    name: ${device_type}-Time point 2 charge enable
     register_type: holding
     address: 173
     bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
@@ -104,7 +105,7 @@ switch:
   - platform: modbus_controller  # Time point 3 charge enable - grid charging enable
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time point 3 charge enable
+    name: ${device_type}-Time point 3 charge enable
     register_type: holding
     address: 174
     bitmask: 1    # 2 hvis man ønsker Gen charging enabel i sted for.
@@ -114,7 +115,7 @@ switch:
   - platform: modbus_controller  # Time point 4 charge enable - grid charging enable
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time point 4 charge enable
+    name: ${device_type}-Time point 4 charge enable
     register_type: holding
     address: 175
     bitmask: 1
@@ -124,7 +125,7 @@ switch:
   - platform: modbus_controller  # Time point 5 charge enable - grid charging enable
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time point 5 charge enable
+    name: ${device_type}-Time point 5 charge enable
     register_type: holding
     address: 176
     bitmask: 1
@@ -134,7 +135,7 @@ switch:
   - platform: modbus_controller  # Time point 6 charge enable - grid charging enable
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Time point 6 charge enable
+    name: ${device_type}-Time point 6 charge enable
     register_type: holding
     address: 177
     bitmask: 1
@@ -145,8 +146,8 @@ binary_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
      skip_updates: 2
-     name: sun12k-AC INV relay # bit 0
-     id: sun12k_AC_INV_relay
+     name: ${device_type}-AC INV relay # bit 0
+     id: ${device_type}_AC_INV_relay
      register_type: holding
      address: 552
      bitmask: 0x1
@@ -154,8 +155,8 @@ binary_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
      skip_updates: 2
-     name: sun12k-AC Load relay Reserved # bit 1
-     id: sun12k_AC_Load_relay_Reserved
+     name: ${device_type}-AC Load relay Reserved # bit 1
+     id: ${device_type}_AC_Load_relay_Reserved
      register_type: holding
      address: 552
      bitmask: 0x2
@@ -163,8 +164,8 @@ binary_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
      skip_updates: 2
-     name: sun12k-AC grid relay # bit 2
-     id: sun12k_AC_grid_relay
+     name: ${device_type}-AC grid relay # bit 2
+     id: ${device_type}_AC_grid_relay
      register_type: holding
      address: 552
      bitmask: 0x4
@@ -172,8 +173,8 @@ binary_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
      skip_updates: 2
-     name: sun12k-AC Generator relay # bit 3
-     id: sun12k_AC_Generator_relay
+     name: ${device_type}-AC Generator relay # bit 3
+     id: ${device_type}_AC_Generator_relay
      register_type: holding
      address: 552
      bitmask: 0x8
@@ -181,8 +182,8 @@ binary_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
      skip_updates: 2
-     name: sun12k-Turn off/on status
-     id: sun12k_Turn_off_on_status
+     name: ${device_type}-Turn off/on status
+     id: ${device_type}_Turn_off_on_status
      register_type: holding
      address: 551
      bitmask: 0x1
@@ -191,12 +192,12 @@ text_sensor:
    - platform: modbus_controller
      modbus_controller_id: ${modbus_controller_id}
      skip_updates: 2
-     id: sun12k_Running_Status
+     id: ${device_type}_Running_Status
      bitmask: 0
      register_type: holding
      address: 500
      raw_encode: HEXBYTES
-     name: sun12k-Running Status
+     name: ${device_type}-Running Status
      lambda: |-
        uint16_t value = modbus_controller::word_from_hex_str(x, 0);
        switch (value) {
@@ -213,8 +214,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Maximum_battery_charge_current
-    name: "sun12k-Maximum battery charge current"
+    id: ${device_type}_Maximum_battery_charge_current
+    name: "${device_type}-Maximum battery charge current"
     address: 108
     unit_of_measurement: A
     value_type: U_WORD
@@ -222,8 +223,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Maximum_battery_discharge_current
-    name: "sun12k-Maximum battery discharge current"
+    id: ${device_type}_Maximum_battery_discharge_current
+    name: "${device_type}-Maximum battery discharge current"
     address: 109
     unit_of_measurement: A
     value_type: U_WORD
@@ -231,8 +232,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Maximum_battery_grid_charge_current
-    name: "sun12k-Maximum battery_grid charge current"
+    id: ${device_type}_Maximum_battery_grid_charge_current
+    name: "${device_type}-Maximum battery_grid charge current"
     address: 128
     unit_of_measurement: A
     value_type: U_WORD
@@ -240,8 +241,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_max_solar_sell_power
-    name: "sun12k-Max Solar Sell Power"
+    id: ${device_type}_max_solar_sell_power
+    name: "${device_type}-Max Solar Sell Power"
     unit_of_measurement: W
     address: 143
     value_type: U_WORD
@@ -249,56 +250,56 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_1
-    name: "sun12k-Time point 1 start"
+    id: ${device_type}_Time_point_1
+    name: "${device_type}-Time point 1 start"
     address: 148
     value_type: U_WORD
     
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_2
-    name: "sun12k-Time point 2 start"
+    id: ${device_type}_Time_point_2
+    name: "${device_type}-Time point 2 start"
     address: 149
     value_type: U_WORD
     
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_3
-    name: "sun12k-Time point 3 start"
+    id: ${device_type}_Time_point_3
+    name: "${device_type}-Time point 3 start"
     address: 150
     value_type: U_WORD
     
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_4
-    name: "sun12k-Time point 4 start"
+    id: ${device_type}_Time_point_4
+    name: "${device_type}-Time point 4 start"
     address: 151
     value_type: U_WORD
     
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_5
-    name: "sun12k-Time point 5 start"
+    id: ${device_type}_Time_point_5
+    name: "${device_type}-Time point 5 start"
     address: 152
     value_type: U_WORD
     
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_6
-    name: "sun12k-Time point 6 start"
+    id: ${device_type}_Time_point_6
+    name: "${device_type}-Time point 6 start"
     address: 153
     value_type: U_WORD
     
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_1_power
-    name: "sun12k-Time point 1 power"
+    id: ${device_type}_Time_point_1_power
+    name: "${device_type}-Time point 1 power"
     unit_of_measurement: W
     address: 154
     value_type: U_WORD
@@ -306,8 +307,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_2_power
-    name: "sun12k-Time point 2 power"
+    id: ${device_type}_Time_point_2_power
+    name: "${device_type}-Time point 2 power"
     unit_of_measurement: W
     address: 155
     value_type: U_WORD
@@ -315,8 +316,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_3_power
-    name: "sun12k-Time point 3 power"
+    id: ${device_type}_Time_point_3_power
+    name: "${device_type}-Time point 3 power"
     unit_of_measurement: W
     address: 156
     value_type: U_WORD
@@ -324,8 +325,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_4_power
-    name: "sun12k-Time point 4 power"
+    id: ${device_type}_Time_point_4_power
+    name: "${device_type}-Time point 4 power"
     unit_of_measurement: W
     address: 157
     value_type: U_WORD
@@ -333,8 +334,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_5_power
-    name: "sun12k-Time point 5 power"
+    id: ${device_type}_Time_point_5_power
+    name: "${device_type}-Time point 5 power"
     unit_of_measurement: W
     address: 158
     value_type: U_WORD
@@ -342,8 +343,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_6_power
-    name: "sun12k-Time point 6 power"
+    id: ${device_type}_Time_point_6_power
+    name: "${device_type}-Time point 6 power"
     unit_of_measurement: W
     address: 159
     value_type: U_WORD
@@ -351,8 +352,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_1_capacity
-    name: "sun12k-Time point 1 capacity"
+    id: ${device_type}_Time_point_1_capacity
+    name: "${device_type}-Time point 1 capacity"
     unit_of_measurement: "%"
     address: 166
     min_value: 0
@@ -363,8 +364,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_2_capacity
-    name: "sun12k-Time point 2 capacity"
+    id: ${device_type}_Time_point_2_capacity
+    name: "${device_type}-Time point 2 capacity"
     unit_of_measurement: "%"
     address: 167
     min_value: 0
@@ -375,8 +376,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_3_capacity
-    name: "sun12k-Time point 3 capacity"
+    id: ${device_type}_Time_point_3_capacity
+    name: "${device_type}-Time point 3 capacity"
     unit_of_measurement: "%"
     address: 168
     min_value: 0
@@ -387,8 +388,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_4_capacity
-    name: "sun12k-Time point 4 capacity"
+    id: ${device_type}_Time_point_4_capacity
+    name: "${device_type}-Time point 4 capacity"
     unit_of_measurement: "%"
     address: 169
     min_value: 0
@@ -399,8 +400,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_5_capacity
-    name: "sun12k-Time point 5 capacity"
+    id: ${device_type}_Time_point_5_capacity
+    name: "${device_type}-Time point 5 capacity"
     unit_of_measurement: "%"
     address: 170
     min_value: 0
@@ -411,8 +412,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_Time_point_6_capacity
-    name: "sun12k-Time point 6 capacity"
+    id: ${device_type}_Time_point_6_capacity
+    name: "${device_type}-Time point 6 capacity"
     unit_of_measurement: "%"
     address: 171
     min_value: 0
@@ -423,8 +424,8 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: sun12k_max_solar_power
-    name: "sun12k-Max Solar Power"
+    id: ${device_type}_max_solar_power
+    name: "${device_type}-Max Solar Power"
     unit_of_measurement: W
     address: 340
     value_type: U_WORD
@@ -432,8 +433,8 @@ number:
 sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Heat sink temperature"
-    id: sun12k_koleplade_temeratur
+    name: "${device_type}-Heat sink temperature"
+    id: ${device_type}_koleplade_temeratur
     register_type: holding
     address: 541
     unit_of_measurement: "°C"
@@ -445,8 +446,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-load frequency"
-    id: sun12k_load_frequency
+    name: "${device_type}-load frequency"
+    id: ${device_type}_load_frequency
     register_type: holding
     address: 655
     unit_of_measurement: "Hz"
@@ -458,8 +459,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-inverter-frequency"
-    id: sun12k_inverter_frequency
+    name: "${device_type}-inverter-frequency"
+    id: ${device_type}_inverter_frequency
     register_type: holding
     address: 638
     unit_of_measurement: "Hz"
@@ -471,8 +472,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-PV1 Power"
-    id: sun12k_PV1_Power
+    name: "${device_type}-PV1 Power"
+    id: ${device_type}_PV1_Power
     register_type: holding
     address: 672
     unit_of_measurement: "W"
@@ -482,8 +483,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-PV2 Power"
-    id: sun12k_PV2_Power
+    name: "${device_type}-PV2 Power"
+    id: ${device_type}_PV2_Power
     register_type: holding
     address: 673
     unit_of_measurement: "W"
@@ -493,8 +494,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-PV1 Voltage"
-    id: sun12k_PV1_Voltage
+    name: "${device_type}-PV1 Voltage"
+    id: ${device_type}_PV1_Voltage
     register_type: holding
     address: 676
     unit_of_measurement: "V"
@@ -506,8 +507,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-PV2 Voltage"
-    id: sun12k_PV2_Voltage
+    name: "${device_type}-PV2 Voltage"
+    id: ${device_type}_PV2_Voltage
     register_type: holding
     address: 678
     unit_of_measurement: "V"
@@ -519,8 +520,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-PV1 Current"
-    id: sun12k_PV1_Current
+    name: "${device_type}-PV1 Current"
+    id: ${device_type}_PV1_Current
     register_type: holding
     address: 677
     unit_of_measurement: "A"
@@ -532,8 +533,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-PV2 Current"
-    id: sun12k_PV2_Current
+    name: "${device_type}-PV2 Current"
+    id: ${device_type}_PV2_Current
     register_type: holding
     address: 679
     unit_of_measurement: "A"
@@ -545,8 +546,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Daily Production"
-    id: sun12k_Daily_Production
+    name: "${device_type}-Daily Production"
+    id: ${device_type}_Daily_Production
     register_type: holding
     address: 529
     unit_of_measurement: "kWh"
@@ -559,8 +560,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Total PV Production"
-    id: sun12k_Total_PV_Production
+    name: "${device_type}-Total PV Production"
+    id: ${device_type}_Total_PV_Production
     register_type: holding
     address: 534
     skip_updates: 10
@@ -574,8 +575,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Total Grid Power"   # Grid side total power
-    id: sun12k_Total_Grid_Power
+    name: "${device_type}-Total Grid Power"   # Grid side total power
+    id: ${device_type}_Total_Grid_Power
     register_type: holding
     address: 625
     unit_of_measurement: "W"
@@ -586,8 +587,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 10
-    name: "sun12k-Daily Energy Bought"
-    id: sun12k_Daily_Energy_Bought
+    name: "${device_type}-Daily Energy Bought"
+    id: ${device_type}_Daily_Energy_Bought
     register_type: holding
     address: 520
     unit_of_measurement: "kWh"
@@ -601,8 +602,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 10
-    name: "sun12k-Daily Energy Sold"
-    id: sun12k_Daily_Energy_Sold
+    name: "${device_type}-Daily Energy Sold"
+    id: ${device_type}_Daily_Energy_Sold
     register_type: holding
     address: 521
     unit_of_measurement: "kWh"
@@ -616,8 +617,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 10
-    name: "sun12k-Total Energy Bought"
-    id: sun12k_Total_Energy_Bought
+    name: "${device_type}-Total Energy Bought"
+    id: ${device_type}_Total_Energy_Bought
     register_type: holding
     address: 522
     unit_of_measurement: "kWh"
@@ -631,8 +632,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 10
-    name: "sun12k-Total Energy Sold"
-    id: sun12k_Total_Energy_Sold
+    name: "${device_type}-Total Energy Sold"
+    id: ${device_type}_Total_Energy_Sold
     register_type: holding
     address: 524
     unit_of_measurement: "kWh"
@@ -646,8 +647,8 @@ sensor:
   - platform: modbus_controller #Total Consumption
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 10
-    name: "sun12k-Total Consumption"
-    id: sun12k_Total_Consumption
+    name: "${device_type}-Total Consumption"
+    id: ${device_type}_Total_Consumption
     register_type: holding
     address: 527
     unit_of_measurement: "kWh"
@@ -661,8 +662,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 10
-    name: "sun12k-active power generation of today"
-    id: sun12k_active_power_generation_of_today
+    name: "${device_type}-active power generation of today"
+    id: ${device_type}_active_power_generation_of_today
     register_type: holding
     address: 502
     unit_of_measurement: "kWh"
@@ -676,8 +677,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Grid Current L1"
-    id: sun12k_Grid_Current_L1
+    name: "${device_type}-Grid Current L1"
+    id: ${device_type}_Grid_Current_L1
     register_type: holding
     address: 630
     unit_of_measurement: "A"
@@ -690,8 +691,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Grid Current L2"
-    id: sun12k_Grid_Current_L2
+    name: "${device_type}-Grid Current L2"
+    id: ${device_type}_Grid_Current_L2
     register_type: holding
     address: 631
     unit_of_measurement: "A"
@@ -704,8 +705,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Grid Current L3"
-    id: sun12k_Grid_Current_L3
+    name: "${device_type}-Grid Current L3"
+    id: ${device_type}_Grid_Current_L3
     register_type: holding
     address: 632
     unit_of_measurement: "A"
@@ -718,8 +719,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Grid Voltage L1"
-    id: sun12k_Grid_Voltage_L1
+    name: "${device_type}-Grid Voltage L1"
+    id: ${device_type}_Grid_Voltage_L1
     register_type: holding
     address: 598
     unit_of_measurement: "V"
@@ -732,8 +733,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Grid Voltage L2"
-    id: sun12k_Grid_Voltage_L2
+    name: "${device_type}-Grid Voltage L2"
+    id: ${device_type}_Grid_Voltage_L2
     register_type: holding
     address: 599
     unit_of_measurement: "V"
@@ -746,8 +747,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Grid Voltage L3"
-    id: sun12k_Grid_Voltage_L3
+    name: "${device_type}-Grid Voltage L3"
+    id: ${device_type}_Grid_Voltage_L3
     register_type: holding
     address: 600
     unit_of_measurement: "V"
@@ -761,8 +762,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Internal CT L1 Power"
-    id: sun12k_Internal_CT_L1_Power
+    name: "${device_type}-Internal CT L1 Power"
+    id: ${device_type}_Internal_CT_L1_Power
     register_type: holding
     address: 604
     unit_of_measurement: "W"
@@ -773,8 +774,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Internal CT L2 Power"
-    id: sun12k_Internal_CT_L2_Power
+    name: "${device_type}-Internal CT L2 Power"
+    id: ${device_type}_Internal_CT_L2_Power
     register_type: holding
     address: 605
     unit_of_measurement: "W"
@@ -785,8 +786,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Internal CT L3 Power"
-    id: sun12k_Internal_CT_L3_Power
+    name: "${device_type}-Internal CT L3 Power"
+    id: ${device_type}_Internal_CT_L3_Power
     register_type: holding
     address: 606
     unit_of_measurement: "W"
@@ -797,8 +798,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Internal total Power" 
-    id: sun12k_Internal_total_Power
+    name: "${device_type}-Internal total Power" 
+    id: ${device_type}_Internal_total_Power
     register_type: holding
     address: 607
     unit_of_measurement: "W"
@@ -809,8 +810,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-External CT L1 Power"
-    id: sun12k_External_CT_L1_Power
+    name: "${device_type}-External CT L1 Power"
+    id: ${device_type}_External_CT_L1_Power
     register_type: holding
     address: 616
     unit_of_measurement: "W"
@@ -821,8 +822,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-External CT L2 Power"
-    id: sun12k_External_CT_L2_Power
+    name: "${device_type}-External CT L2 Power"
+    id: ${device_type}_External_CT_L2_Power
     register_type: holding
     address: 617
     unit_of_measurement: "W"
@@ -833,8 +834,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-External CT L3 Power"
-    id: sun12k_External_CT_L3_Power
+    name: "${device_type}-External CT L3 Power"
+    id: ${device_type}_External_CT_L3_Power
     register_type: holding
     address: 618
     unit_of_measurement: "W"
@@ -844,8 +845,8 @@ sensor:
  
   - platform: modbus_controller  
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Out-of-grid–total power"
-    id: sun12k_out_of_grid_total_power
+    name: "${device_type}-Out-of-grid–total power"
+    id: ${device_type}_out_of_grid_total_power
     register_type: holding
     address: 619
     unit_of_measurement: "W"
@@ -855,8 +856,8 @@ sensor:
     
   - platform: modbus_controller # Load totalpower
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Load totalpower" 
-    id: sun12k_Load_totalpower
+    name: "${device_type}-Load totalpower" 
+    id: ${device_type}_Load_totalpower
     register_type: holding
     address: 653
     unit_of_measurement: "W"
@@ -867,8 +868,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Warning1"
-    id:  sun12k_Warning1
+    name: "${device_type}-Warning1"
+    id:  ${device_type}_Warning1
     register_type: holding
     address: 553
     accuracy_decimals: 0
@@ -877,8 +878,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Warning2"
-    id:  sun12k_Warning2
+    name: "${device_type}-Warning2"
+    id:  ${device_type}_Warning2
     register_type: holding
     address: 554
     accuracy_decimals: 0
@@ -887,8 +888,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Warning3"
-    id:  sun12k_Warning3
+    name: "${device_type}-Warning3"
+    id:  ${device_type}_Warning3
     register_type: holding
     address: 555
     accuracy_decimals: 0
@@ -897,8 +898,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Error1"
-    id:  sun12k_Error1
+    name: "${device_type}-Error1"
+    id:  ${device_type}_Error1
     register_type: holding
     address: 556
     accuracy_decimals: 0
@@ -907,8 +908,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Error2"
-    id:  sun12k_Error2
+    name: "${device_type}-Error2"
+    id:  ${device_type}_Error2
     register_type: holding
     address: 557
     accuracy_decimals: 0
@@ -917,8 +918,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-Error3"
-    id:  sun12k_Error3
+    name: "${device_type}-Error3"
+    id:  ${device_type}_Error3
     register_type: holding
     address: 558
     accuracy_decimals: 0
@@ -927,8 +928,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
 
-    name: "sun12k-Failure status of communication board"
-    id:  sun12k_Failure_status_of_communication_board
+    name: "${device_type}-Failure status of communication board"
+    id:  ${device_type}_Failure_status_of_communication_board
     register_type: holding
     address: 548
     accuracy_decimals: 0
@@ -938,8 +939,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 5
-    name: "sun12k-Total charge of the battery"
-    id:  sun12k_battery_total_charge
+    name: "${device_type}-Total charge of the battery"
+    id:  ${device_type}_battery_total_charge
     register_type: holding
     address: 516
     unit_of_measurement: "kWh"
@@ -953,8 +954,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 5
-    name: "sun12k-Total discharge of the battery"
-    id:  sun12k_battery_total_discharge
+    name: "${device_type}-Total discharge of the battery"
+    id:  ${device_type}_battery_total_discharge
     register_type: holding
     address: 518
     unit_of_measurement: "kWh"
@@ -967,8 +968,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-battery temperature"
-    id:  sun12k_battery_temperature
+    name: "${device_type}-battery temperature"
+    id:  ${device_type}_battery_temperature
     register_type: holding
     address: 586
     unit_of_measurement: "°C"
@@ -980,8 +981,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-battery voltage"
-    id: sun12k_battery_voltage
+    name: "${device_type}-battery voltage"
+    id: ${device_type}_battery_voltage
     register_type: holding
     address: 587  
     unit_of_measurement: "V"
@@ -994,8 +995,8 @@ sensor:
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
     skip_updates: 2
-    name: "sun12k-battery capacity"
-    id: sun12k_battery_capacity
+    name: "${device_type}-battery capacity"
+    id: ${device_type}_battery_capacity
     register_type: holding
     address: 588
     unit_of_measurement: "%"
@@ -1005,8 +1006,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Battery output power"
-    id: sun12k_Battery_output_power
+    name: "${device_type}-Battery output power"
+    id: ${device_type}_Battery_output_power
     register_type: holding
     address: 590
     unit_of_measurement: "W"
@@ -1016,8 +1017,8 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Battery output current"
-    id: sun12k_Battery_output_current
+    name: "${device_type}-Battery output current"
+    id: ${device_type}_Battery_output_current
     register_type: holding
     address: 591
     unit_of_measurement: "A"
@@ -1031,7 +1032,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: sun12k-Energy priority
+    name: ${device_type}-Energy priority
     address: 141
     value_type: U_WORD
     optionsmap:
@@ -1041,7 +1042,7 @@ select:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    name: "sun12k-Limit control mode"
+    name: "${device_type}-Limit control mode"
     address: 142
     value_type: U_WORD
     optionsmap:
