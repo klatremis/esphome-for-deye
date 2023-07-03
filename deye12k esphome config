@@ -237,7 +237,7 @@ number:
     unit_of_measurement: A
     value_type: U_WORD
 
-- platform: modbus_controller
+  - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     id: sun12k_max_solar_sell_power
@@ -420,7 +420,7 @@ number:
     step: 5
     value_type: U_WORD
 
-- platform: modbus_controller
+  - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     id: sun12k_max_solar_power
