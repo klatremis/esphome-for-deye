@@ -35,7 +35,7 @@ I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
 
 ![esp32 rs485_bb](https://user-images.githubusercontent.com/22115157/211201233-f5fe9189-e6b3-4ee1-9baa-48068f078127.jpg)
 
-## Home assistant user interfase
+## Home assistant user interface
 For the card i use for the time of use settings like the inverters interface. Use the add-on "multiple entity row" from HACS and inspiration from my configuration of it below.
 * https://github.com/klatremis/esphome-for-deye/blob/main/time%20of%20use%20card
 
