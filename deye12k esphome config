@@ -1,8 +1,8 @@
 substitutions:
-  name: deye12
-  device_description: "Esphome component for Deye sun-12k-sg04lp3"
-  modbus_controller_id: sg04lp3
-  device_type: sun12k
+  name: deye12                                                       #name in ESPhome
+  device_description: "Esphome component for Deye sun-12k-sg04lp3"   #Description in ESPhome
+  modbus_controller_id: sg04lp3                                      #just a random name for the modbus controler
+  device_type: sun12k                                                #all entities in Home Assistant will start with this text to help identify the entitys 
 
 esphome:
   name: ${name}
@@ -19,16 +19,12 @@ logger:
 api:
 
 ota:
-  password: "123acd007175d48afaa2c944c3ccbb1e"
 
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Deye12K Fallback Hotspot"
-    password: "36BiodTgKCJI"
+    ssid: ${device_name}
 
 captive_portal:
 
@@ -41,7 +37,7 @@ uart:
  
 modbus:
   id: modbus1
-# flow_control_pin: 4
+# flow_control_pin: 4 #for use when you use a rs485 board without auto flow control. Like the rs485 max board.
  
 modbus_controller:
   - id: ${modbus_controller_id}
@@ -71,7 +67,7 @@ switch:
     entity_category: config
     icon: "mdi:toggle-switch"
  
-  - platform: modbus_controller  # Advanced peak shaving and valley filling function enabled
+  - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
     name: ${device_type}-Time of Use 
@@ -575,7 +571,7 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-    name: "${device_type}-Total Grid Power"   # Grid side total power
+    name: "${device_type}-Total Grid Power"
     id: ${device_type}_Total_Grid_Power
     register_type: holding
     address: 625
@@ -927,7 +923,6 @@ sensor:
  
   - platform: modbus_controller
     modbus_controller_id: ${modbus_controller_id}
-
     name: "${device_type}-Failure status of communication board"
     id:  ${device_type}_Failure_status_of_communication_board
     register_type: holding
