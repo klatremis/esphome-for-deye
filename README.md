@@ -39,10 +39,4 @@ I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
 For the card i use for the time of use settings like the inverters interface. Use the add-on "multiple entity row" from HACS and inspiration from my configuration of it below.
 * https://github.com/klatremis/esphome-for-deye/blob/main/time%20of%20use%20card
 
-## Automation
-[@Alphaemef](https://gist.github.com/Alphaemef)
- has made some awesome automations for the inverter/system in Home Assistant
-* Tesla charging automation - An automation/script that adjust the charge current the solar production. [Tesla automation](https://gist.github.com/Alphaemef/70f203cc6a5acb75d987ae88d9be2edf)
-* Solar Inverter Suite V2 - Can sell the battery stored energy, turn off selling when sell price is too low, optimize the economic for charging and selling according the nordpool prices. [Solar Inverter Suite, Basic Automations V2](https://gist.github.com/Alphaemef/71876e8ac4bf86a1db3d4148ba2d1a32)
-
 
