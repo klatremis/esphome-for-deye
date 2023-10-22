@@ -7,10 +7,10 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_1_start
+      - entity: number.sun12k_Time_point_1
         name: From
         format: precision0
-      - entity: number.sun12k_time_point_2_start
+      - entity: number.sun12k_time_point_2
         name: To
         format: precision0
       - entity: number.sun12k_time_point_1_capacity
@@ -23,10 +23,10 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_2_start
+      - entity: number.sun12k_time_point_2
         name: From
         format: precision0
-      - entity: number.sun12k_time_point_3_start
+      - entity: number.sun12k_time_point_3
         name: To
         format: precision0
       - entity: number.sun12k_time_point_2_capacity
@@ -39,10 +39,10 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_3_start
+      - entity: number.sun12k_time_point_3
         name: From
         format: precision0
-      - entity: number.sun12k_time_point_4_start
+      - entity: number.sun12k_time_point_4
         name: To
         format: precision0
       - entity: number.sun12k_time_point_3_capacity
@@ -55,10 +55,10 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_4_start
+      - entity: number.sun12k_time_point_4
         name: From
         format: precision0
-      - entity: number.sun12k_time_point_5_start
+      - entity: number.sun12k_time_point_5
         name: To
         format: precision0
       - entity: number.sun12k_time_point_4_capacity
@@ -71,10 +71,10 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_5_start
+      - entity: number.sun12k_time_point_5
         name: From
         format: precision0
-      - entity: number.sun12k_time_point_6_start
+      - entity: number.sun12k_time_point_6
         name: To
         format: precision0
       - entity: number.sun12k_time_point_5_capacity
@@ -87,10 +87,10 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_6_start
+      - entity: number.sun12k_time_point_6
         name: From
         format: precision0
-      - entity: number.sun12k_time_point_1_start
+      - entity: number.sun12k_time_point_1
         name: To
         format: precision0
       - entity: number.sun12k_time_point_6_capacity
