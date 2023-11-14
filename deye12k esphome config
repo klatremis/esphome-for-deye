@@ -246,54 +246,6 @@ number:
   - platform: modbus_controller
     use_write_multiple: true
     modbus_controller_id: ${modbus_controller_id}
-    id: ${device_type}_Time_point_1
-    name: "${device_type}-Time point 1 start"
-    address: 148
-    value_type: U_WORD
-    
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    id: ${device_type}_Time_point_2
-    name: "${device_type}-Time point 2 start"
-    address: 149
-    value_type: U_WORD
-    
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    id: ${device_type}_Time_point_3
-    name: "${device_type}-Time point 3 start"
-    address: 150
-    value_type: U_WORD
-    
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    id: ${device_type}_Time_point_4
-    name: "${device_type}-Time point 4 start"
-    address: 151
-    value_type: U_WORD
-    
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    id: ${device_type}_Time_point_5
-    name: "${device_type}-Time point 5 start"
-    address: 152
-    value_type: U_WORD
-    
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
-    id: ${device_type}_Time_point_6
-    name: "${device_type}-Time point 6 start"
-    address: 153
-    value_type: U_WORD
-    
-  - platform: modbus_controller
-    use_write_multiple: true
-    modbus_controller_id: ${modbus_controller_id}
     id: ${device_type}_Time_point_1_power
     name: "${device_type}-Time point 1 power"
     unit_of_measurement: W
@@ -1044,3 +996,340 @@ select:
       "Selling first": 0
       "Zero export to load": 1
       "Zero export to CT": 2
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: ${device_type}_Time_point_1
+    name: "${device_type}-Time point 1 start"
+    address: 148
+    value_type: U_WORD
+    optionsmap:
+      "00:00": 0
+      "00:30": 30
+      "01:00": 100
+      "01:30": 130
+      "02:00": 200
+      "02:30": 230
+      "03:00": 300
+      "03:30": 330
+      "04:00": 400
+      "04:30": 430
+      "05:00": 500
+      "05:30": 530
+      "06:00": 600
+      "06:30": 630
+      "07:00": 700
+      "07:30": 730
+      "08:00": 800
+      "08:30": 830
+      "09:00": 900
+      "09:30": 930
+      "10:00": 1000
+      "10:30": 1030
+      "11:00": 1100
+      "11:30": 1130
+      "12:00": 1200
+      "12:30": 1230
+      "13:00": 1300
+      "13:30": 1330
+      "14:00": 1400
+      "14:30": 1430
+      "15:00": 1500
+      "15:30": 1530
+      "16:00": 1600
+      "16:30": 1630
+      "17:00": 1700
+      "17:30": 1730
+      "18:00": 1800
+      "18:30": 1830
+      "19:00": 1900
+      "19:30": 1930
+      "20:00": 2000
+      "20:30": 2030
+      "21:00": 2100
+      "21:30": 2130
+      "22:00": 2200
+      "22:30": 2230
+      "23:00": 2300
+      "23:30": 2330
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: ${device_type}_Time_point_2
+    name: "${device_type}-Time point 2 start"
+    address: 149
+    value_type: U_WORD
+    optionsmap:
+      "00:00": 0
+      "00:30": 30
+      "01:00": 100
+      "01:30": 130
+      "02:00": 200
+      "02:30": 230
+      "03:00": 300
+      "03:30": 330
+      "04:00": 400
+      "04:30": 430
+      "05:00": 500
+      "05:30": 530
+      "06:00": 600
+      "06:30": 630
+      "07:00": 700
+      "07:30": 730
+      "08:00": 800
+      "08:30": 830
+      "09:00": 900
+      "09:30": 930
+      "10:00": 1000
+      "10:30": 1030
+      "11:00": 1100
+      "11:30": 1130
+      "12:00": 1200
+      "12:30": 1230
+      "13:00": 1300
+      "13:30": 1330
+      "14:00": 1400
+      "14:30": 1430
+      "15:00": 1500
+      "15:30": 1530
+      "16:00": 1600
+      "16:30": 1630
+      "17:00": 1700
+      "17:30": 1730
+      "18:00": 1800
+      "18:30": 1830
+      "19:00": 1900
+      "19:30": 1930
+      "20:00": 2000
+      "20:30": 2030
+      "21:00": 2100
+      "21:30": 2130
+      "22:00": 2200
+      "22:30": 2230
+      "23:00": 2300
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: ${device_type}_Time_point_3
+    name: "${device_type}-Time point 3 start"
+    address: 150
+    value_type: U_WORD
+    optionsmap:
+      "00:00": 0
+      "00:30": 30
+      "01:00": 100
+      "01:30": 130
+      "02:00": 200
+      "02:30": 230
+      "03:00": 300
+      "03:30": 330
+      "04:00": 400
+      "04:30": 430
+      "05:00": 500
+      "05:30": 530
+      "06:00": 600
+      "06:30": 630
+      "07:00": 700
+      "07:30": 730
+      "08:00": 800
+      "08:30": 830
+      "09:00": 900
+      "09:30": 930
+      "10:00": 1000
+      "10:30": 1030
+      "11:00": 1100
+      "11:30": 1130
+      "12:00": 1200
+      "12:30": 1230
+      "13:00": 1300
+      "13:30": 1330
+      "14:00": 1400
+      "14:30": 1430
+      "15:00": 1500
+      "15:30": 1530
+      "16:00": 1600
+      "16:30": 1630
+      "17:00": 1700
+      "17:30": 1730
+      "18:00": 1800
+      "18:30": 1830
+      "19:00": 1900
+      "19:30": 1930
+      "20:00": 2000
+      "20:30": 2030
+      "21:00": 2100
+      "21:30": 2130
+      "22:00": 2200
+      "22:30": 2230
+      "23:00": 2300
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: ${device_type}_Time_point_4
+    name: "${device_type}-Time point 4 start"
+    address: 151
+    value_type: U_WORD
+    optionsmap:
+      "00:00": 0
+      "00:30": 30
+      "01:00": 100
+      "01:30": 130
+      "02:00": 200
+      "02:30": 230
+      "03:00": 300
+      "03:30": 330
+      "04:00": 400
+      "04:30": 430
+      "05:00": 500
+      "05:30": 530
+      "06:00": 600
+      "06:30": 630
+      "07:00": 700
+      "07:30": 730
+      "08:00": 800
+      "08:30": 830
+      "09:00": 900
+      "09:30": 930
+      "10:00": 1000
+      "10:30": 1030
+      "11:00": 1100
+      "11:30": 1130
+      "12:00": 1200
+      "12:30": 1230
+      "13:00": 1300
+      "13:30": 1330
+      "14:00": 1400
+      "14:30": 1430
+      "15:00": 1500
+      "15:30": 1530
+      "16:00": 1600
+      "16:30": 1630
+      "17:00": 1700
+      "17:30": 1730
+      "18:00": 1800
+      "18:30": 1830
+      "19:00": 1900
+      "19:30": 1930
+      "20:00": 2000
+      "20:30": 2030
+      "21:00": 2100
+      "21:30": 2130
+      "22:00": 2200
+      "22:30": 2230
+      "23:00": 2300
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: ${device_type}_Time_point_5
+    name: "${device_type}-Time point 5 start"
+    address: 152
+    value_type: U_WORD
+    optionsmap:
+      "00:00": 0
+      "00:30": 30
+      "01:00": 100
+      "01:30": 130
+      "02:00": 200
+      "02:30": 230
+      "03:00": 300
+      "03:30": 330
+      "04:00": 400
+      "04:30": 430
+      "05:00": 500
+      "05:30": 530
+      "06:00": 600
+      "06:30": 630
+      "07:00": 700
+      "07:30": 730
+      "08:00": 800
+      "08:30": 830
+      "09:00": 900
+      "09:30": 930
+      "10:00": 1000
+      "10:30": 1030
+      "11:00": 1100
+      "11:30": 1130
+      "12:00": 1200
+      "12:30": 1230
+      "13:00": 1300
+      "13:30": 1330
+      "14:00": 1400
+      "14:30": 1430
+      "15:00": 1500
+      "15:30": 1530
+      "16:00": 1600
+      "16:30": 1630
+      "17:00": 1700
+      "17:30": 1730
+      "18:00": 1800
+      "18:30": 1830
+      "19:00": 1900
+      "19:30": 1930
+      "20:00": 2000
+      "20:30": 2030
+      "21:00": 2100
+      "21:30": 2130
+      "22:00": 2200
+      "22:30": 2230
+      "23:00": 2300
+    
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    id: ${device_type}_Time_point_6
+    name: "${device_type}-Time point 6 start"
+    address: 153
+    value_type: U_WORD
+    optionsmap:
+      "00:00": 0
+      "00:30": 30
+      "01:00": 100
+      "01:30": 130
+      "02:00": 200
+      "02:30": 230
+      "03:00": 300
+      "03:30": 330
+      "04:00": 400
+      "04:30": 430
+      "05:00": 500
+      "05:30": 530
+      "06:00": 600
+      "06:30": 630
+      "07:00": 700
+      "07:30": 730
+      "08:00": 800
+      "08:30": 830
+      "09:00": 900
+      "09:30": 930
+      "10:00": 1000
+      "10:30": 1030
+      "11:00": 1100
+      "11:30": 1130
+      "12:00": 1200
+      "12:30": 1230
+      "13:00": 1300
+      "13:30": 1330
+      "14:00": 1400
+      "14:30": 1430
+      "15:00": 1500
+      "15:30": 1530
+      "16:00": 1600
+      "16:30": 1630
+      "17:00": 1700
+      "17:30": 1730
+      "18:00": 1800
+      "18:30": 1830
+      "19:00": 1900
+      "19:30": 1930
+      "20:00": 2000
+      "20:30": 2030
+      "21:00": 2100
+      "21:30": 2130
+      "22:00": 2200
+      "22:30": 2230
+      "23:00": 2300
