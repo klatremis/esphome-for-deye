@@ -28,6 +28,7 @@ I can only refer to this powerforum thread. https://powerforum.co.za/topic/8646-
 
 ## Hardware diagram
 RX / TX between esp and ttl converter way have to be swapped. This seems to be a little different from espboard to espboard.
+Check Termination: check that 120 Ohm are between B+ and B- (short wire); for long wire use 120 Ohms on both sides.
 If it dosent communicate(RX/TX led both blinking) Try swap rx/tx on the esp.
 
 I powered the esp32 from CN2 pin 7&8 with 12V into a USB converter.
