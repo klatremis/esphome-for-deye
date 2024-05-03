@@ -1044,3 +1044,25 @@ select:
       "Selling first": 0
       "Zero export to load": 1
       "Zero export to CT": 2
+
+  - platform: modbus_controller
+    use_write_multiple: true
+    modbus_controller_id: ${modbus_controller_id}
+    name: "sun12k-Combined Mi. Export to Grid Cutoff"
+    address: 178
+    value_type: U_WORD
+    optionsmap:
+      # Explainer:
+      # Export to Grid Cutoff Disable, Gen Peak Shaving Disable, Grid Peak Shaving Enable, On Grid Always On Disable, External Relay Disable, Loss of lithium battery report fault Enable
+      # 60090 in bits: 1110101010111010, and in bytes: 11101010, 10111010
+      # The bytes are swapped, so 1110101010111010 becomes 1010111010101011, and matches the manual
+      # 11: Export to Grid Cutoff Disable
+      # 10: Gen Peak Shaving Disable
+      # 10: Grid Peak Shaving Enable
+      # 10: On Grid Always On Disable
+      # 10: External Relay Disable
+      # 11: Loss of lithium battery report fault Enable
+      "Mode 1": 60090 # 1110101010111010: Export to Grid Cutoff Disable, Gen Peak Shaving Disable, Grid Peak Shaving Enable, On Grid Always On Disable, External Relay Disable, Loss of lithium battery report fault Enable
+      "Mode 2": 60091 # 1110101010111011: Export to Grid Cutoff Enable, Gen Peak Shaving Disable, Grid Peak Shaving Enable, On Grid Always On Disable, External Relay Disable, Loss of lithium battery report fault Enable
+      "Mode 3": 60074 # 1110101010101010: Export to Grid Cutoff Disable, Gen Peak Shaving Disable, Grid Peak Shaving Disable, On Grid Always On Disable, External Relay Disable, Loss of lithium battery report fault Enable
+      "Mode 4": 60075 # 1110101010101011: Export to Grid Cutoff Enable, Gen Peak Shaving Disable, Grid Peak Shaving Disable, On Grid Always On Disable, External Relay Disable, Loss of lithium battery report fault Enable
