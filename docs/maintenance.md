@@ -5,7 +5,8 @@
 - Pin development/build checks to ESPHome 2026.9.0.
 - Migrate the legacy empty `ota:` entry to the ESPHome OTA platform.
 - Validate and compile the generic ESP32/Arduino example in CI.
-- Preserve resolved entity names, IDs, registers, scaling, and control types.
+- Preserve resolved names, IDs, registers and scaling. Migrate the six start-time
+  controls from numbers to hourly selects as requested; document HA migration.
 - Standardize YAML formatting, field order, bitmasks and section comments.
 - Remove an unreachable return from the running-state decoder and expose the
   existing device description as ESPHome metadata.
@@ -20,10 +21,11 @@ the firmware build, not inverter compatibility or register semantics.
 
 ## Existing contributions reviewed
 
-- [PR #23](https://github.com/klatremis/esphome-for-deye/pull/23): changes Time of
-  Use starts from numbers to selects. This changes the Home Assistant entity
-  domain and needs a migration plan. The diff targets an old filename and some
-  slots omit 23:30. Review separately.
+- [PR #23](https://github.com/klatremis/esphome-for-deye/pull/23): proposes start-time
+  selects at half-hour intervals, targets an old filename and omits 23:30 for some
+  slots. The current update implements the maintainer's requested whole-hour
+  choices (00:00–24:00) for all six slots, with migration notes and dashboard tests.
+  This does not merge or close #23.
 - [PR #27](https://github.com/klatremis/esphome-for-deye/pull/27): adds termination
   guidance. The README now asks users to check termination and existing resistors
   without prescribing the same arrangement for every bus.

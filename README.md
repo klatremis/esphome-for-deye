@@ -88,9 +88,42 @@ available and is generated from the package sources. Existing copied configurati
 continue to work independently; they do not automatically switch to packages.
 For a local repository checkout, `deye.yaml` includes `packages/deye.yaml` directly.
 
-This update preserves resolved entity names, IDs, register addresses, scales and
-number/select types. Keep your credentials and customizations when upgrading.
-Deleting the Home Assistant integration is not required.
+This update preserves resolved names, IDs, register addresses and scales. The six
+Time of Use start times change from numbers to selects; follow the migration below.
+Keep your credentials and customizations. Deleting the integration is not required.
+
+### Time of Use hour selectors
+
+All six start times are dropdowns with `00:00`, `01:00`, ... `23:00`, `24:00`,
+matching the maintainer's 20K configuration. Registers 148–153 still receive HHMM
+values: selecting `13:00` writes `1300`. `24:00` writes `2400`; support for that
+endpoint on other model/firmware combinations still needs hardware verification.
+Power and state-of-charge limits remain numeric controls.
+
+**Migration:** start-time entities move from `number` to `select`. For the default
+prefix, replace `number.sun12k_time_point_1_start` with
+`select.sun12k_time_point_1_start`, and likewise for slots 2–6. Use the actual IDs
+shown by your Home Assistant installation if you renamed entities previously.
+Update dashboard references, automation triggers/conditions and service calls.
+Replace `number.set_value` with `select.select_option`, for example:
+
+```yaml
+action: select.select_option
+target:
+  entity_id: select.sun12k_time_point_1_start
+data:
+  option: "13:00"
+```
+
+The new entity state is a string such as `"13:00"`, not the number `1300`.
+The bundled dashboard has been updated; tap a From/To value to open its selector.
+Old number entities may remain unavailable until you remove their stale entries.
+
+Existing non-hour settings such as 13:30 are not represented by these selectors.
+They are not rounded or rewritten automatically; the select may remain unknown
+(or retain a previous state) until you explicitly choose a supported hour.
+Record existing schedules before migrating. Confirm start times and slot order
+on the inverter after making changes.
 
 ### Polling and upgrade notes
 

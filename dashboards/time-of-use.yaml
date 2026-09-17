@@ -7,12 +7,14 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_1_start
+      - entity: select.sun12k_time_point_1_start
         name: From
-        format: precision0
-      - entity: number.sun12k_time_point_2_start
+        tap_action:
+          action: more-info
+      - entity: select.sun12k_time_point_2_start
         name: To
-        format: precision0
+        tap_action:
+          action: more-info
       - entity: number.sun12k_time_point_1_capacity
         name: SOC
         format: precision0
@@ -23,12 +25,14 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_2_start
+      - entity: select.sun12k_time_point_2_start
         name: From
-        format: precision0
-      - entity: number.sun12k_time_point_3_start
+        tap_action:
+          action: more-info
+      - entity: select.sun12k_time_point_3_start
         name: To
-        format: precision0
+        tap_action:
+          action: more-info
       - entity: number.sun12k_time_point_2_capacity
         name: SOC
         format: precision0
@@ -39,12 +43,14 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_3_start
+      - entity: select.sun12k_time_point_3_start
         name: From
-        format: precision0
-      - entity: number.sun12k_time_point_4_start
+        tap_action:
+          action: more-info
+      - entity: select.sun12k_time_point_4_start
         name: To
-        format: precision0
+        tap_action:
+          action: more-info
       - entity: number.sun12k_time_point_3_capacity
         name: SOC
         format: precision0
@@ -55,12 +61,14 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_4_start
+      - entity: select.sun12k_time_point_4_start
         name: From
-        format: precision0
-      - entity: number.sun12k_time_point_5_start
+        tap_action:
+          action: more-info
+      - entity: select.sun12k_time_point_5_start
         name: To
-        format: precision0
+        tap_action:
+          action: more-info
       - entity: number.sun12k_time_point_4_capacity
         name: SOC
         format: precision0
@@ -71,12 +79,14 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_5_start
+      - entity: select.sun12k_time_point_5_start
         name: From
-        format: precision0
-      - entity: number.sun12k_time_point_6_start
+        tap_action:
+          action: more-info
+      - entity: select.sun12k_time_point_6_start
         name: To
-        format: precision0
+        tap_action:
+          action: more-info
       - entity: number.sun12k_time_point_5_capacity
         name: SOC
         format: precision0
@@ -87,12 +97,14 @@ entities:
     state_header: Charge
     state_color: true
     entities:
-      - entity: number.sun12k_time_point_6_start
+      - entity: select.sun12k_time_point_6_start
         name: From
-        format: precision0
-      - entity: number.sun12k_time_point_1_start
+        tap_action:
+          action: more-info
+      - entity: select.sun12k_time_point_1_start
         name: To
-        format: precision0
+        tap_action:
+          action: more-info
       - entity: number.sun12k_time_point_6_capacity
         name: SOC
         format: precision0

@@ -37,6 +37,25 @@ def main():
     assert package == legacy, "Package and standalone configurations differ"
     assert package["modbus_controller"][0]["update_interval"] == "20s"
 
+    # All six HHMM registers must be selects, with no duplicate number writers.
+    time_registers = set(range(148, 154))
+    times = {e["address"]: e for e in package["select"] if e["address"] in time_registers}
+    assert set(times) == time_registers
+    assert not any(e["address"] in time_registers for e in package["number"])
+    for address, entity in times.items():
+        assert entity["id"] == f"sun12k_Time_point_{address - 147}"
+        assert entity["value_type"] == "U_WORD"
+        assert entity["use_write_multiple"] is True
+        assert entity["optionsmap"] == {f"{hour:02d}:00": hour * 100 for hour in range(25)}
+
+    dashboard = yaml.safe_load((ROOT / "dashboards/time-of-use.yaml").read_text(encoding="utf-8"))
+    for slot, row in enumerate(dashboard["entities"], 1):
+        start, end, capacity = row["entities"]
+        assert start["entity"] == f"select.sun12k_time_point_{slot}_start"
+        assert end["entity"] == f"select.sun12k_time_point_{slot % 6 + 1}_start"
+        assert "format" not in start and "format" not in end
+        assert capacity["entity"] == f"number.sun12k_time_point_{slot}_capacity"
+
     with tempfile.TemporaryDirectory(prefix="deye-test-") as directory:
         test_dir = Path(directory)
         shutil.copy(ROOT / "tests/secrets.example.yaml", test_dir / "secrets.yaml")

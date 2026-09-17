@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Change all six Time of Use start times from numbers to hourly selects, including
+  24:00, matching the maintainer's 20K configuration. Update Home Assistant
+  dashboards/automations from `number` to `select`; see the README migration guide.
+
 - Set default Modbus polling to 20 seconds; expose interval, address and UART pins
   through substitutions.
 - Separate the generic device configuration from shared Deye registers.
@@ -20,5 +24,5 @@
   normalization and removing the slash deprecation warning.
 
 Resolved entity names on ESPHome 2026.9, IDs, register addresses, scales and control
-types are preserved. Check the status entity when upgrading from older ESPHome.
+types are preserved except for the six explicitly migrated start-time selects. Check the status entity when upgrading from older ESPHome.
 Hardware verification is still pending.
