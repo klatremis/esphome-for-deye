@@ -88,7 +88,7 @@ available and is generated from the package sources. Existing copied configurati
 continue to work independently; they do not automatically switch to packages.
 For a local repository checkout, `deye.yaml` includes `packages/deye.yaml` directly.
 
-This update preserves entity source names, IDs, register addresses, scales and
+This update preserves resolved entity names, IDs, register addresses, scales and
 number/select types. Keep your credentials and customizations when upgrading.
 Deleting the Home Assistant integration is not required.
 
@@ -99,10 +99,11 @@ The default is **20 seconds**, adjustable through `update_interval`. ESPHome
 All register groups follow the controller interval. This differs from older
 ESPHome behavior; check communication logs for timeouts and CRC errors on hardware.
 
-The existing `Turn off/on status` name contains `/`. ESPHome 2026.9 normalizes it
-to a Unicode fraction slash and warns that this becomes an error in 2027.7.0.
-Verify the existing Home Assistant entity after upgrading; a deliberate name
-migration is tracked separately.
+The status entity now explicitly uses `Turn off⁄on status` (Unicode fraction
+slash), matching the name ESPHome 2026.9 already produced from `Turn off/on status`.
+This removes the deprecation warning without changing the resolved name on the
+pinned version. When upgrading from older ESPHome versions, check this entity in
+Home Assistant.
 
 ## Hardware
 

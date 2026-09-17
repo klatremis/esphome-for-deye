@@ -15,6 +15,13 @@ Keep hardware-specific changes separate from shared register corrections.
 
 ## Checks
 
+Use two-space YAML indentation, decimal register addresses and hexadecimal
+bitmasks. Within entities, keep identification first, register decoding next,
+then units/metadata, limits and filters or lambdas. Keep filter order unchanged:
+for example, temperature offset must be applied before scaling. Preserve legacy
+names and IDs even when their spelling is inconsistent; renaming needs a separate
+migration. Prefer explicit ESPHome fields over YAML anchors for register entries.
+
 Use Python 3.12 and install `requirements-dev.txt`. For development, copy
 `tests/secrets.example.yaml` to `secrets.yaml` only if no real secrets file exists.
 Never commit real credentials or upload firmware containing test credentials.

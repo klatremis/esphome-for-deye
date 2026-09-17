@@ -13,6 +13,7 @@ substitutions:
 
 esphome:
   name: ${name}
+  comment: ${device_description}
 
 esp32:
   board: ${esp32_board}

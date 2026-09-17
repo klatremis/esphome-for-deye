@@ -5,7 +5,11 @@
 - Pin development/build checks to ESPHome 2026.9.0.
 - Migrate the legacy empty `ota:` entry to the ESPHome OTA platform.
 - Validate and compile the generic ESP32/Arduino example in CI.
-- Preserve entity names, IDs, registers, scaling, and control types.
+- Preserve resolved entity names, IDs, registers, scaling, and control types.
+- Standardize YAML formatting, field order, bitmasks and section comments.
+- Remove an unreachable return from the running-state decoder and expose the
+  existing device description as ESPHome metadata.
+- Write the already-normalized status name explicitly to eliminate the slash warning.
 - Keep the historical standalone filename as an automatically generated copy.
 - Separate generic hardware/connectivity from the shared register package.
 - Use configurable 20-second polling and remove ignored `skip_updates` fields.
@@ -34,9 +38,8 @@ No existing PR has been merged or closed as part of this review.
 - ESPHome 2026.9.0 warns that `skip_updates` has no effect and will be removed in
   2027.3.0. The ignored fields have been removed and 20-second polling is now
   explicit. Review bus load on hardware before considering separate slower controllers.
-- ESPHome replaces `/` in `Turn off/on status` with a fraction slash and warns
-  this becomes an error in 2027.7.0. Plan an explicit name migration and check
-  Home Assistant entity identity before changing it.
+- The status name uses an explicit Unicode fraction slash, matching ESPHome
+  2026.9 normalization. Check entity identity when upgrading older installations.
 
 - [Issue #45](https://github.com/klatremis/esphome-for-deye/issues/45): investigate
   total imported/exported energy rollover. The current configuration uses one

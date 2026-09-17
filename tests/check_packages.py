@@ -45,6 +45,7 @@ def main():
         entry.write_text(
             'substitutions:\n'
             '  name: deye-test\n'
+            '  device_description: Custom test device\n'
             '  device_type: custom\n'
             '  modbus_controller_id: custom_controller\n'
             '  modbus_address: "2"\n'
@@ -56,6 +57,7 @@ def main():
         )
         custom = validate(entry)
         assert custom["esphome"]["name"] == "deye-test"
+        assert custom["esphome"]["comment"] == "Custom test device"
         controller = custom["modbus_controller"][0]
         assert controller["id"] == "custom_controller"
         assert controller["address"] == 2

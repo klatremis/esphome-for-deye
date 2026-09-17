@@ -13,6 +13,12 @@
 - Remove ignored `skip_updates` fields. All registers now follow the configured
   controller interval; this changes polling compared with older ESPHome versions.
 
-Entity source names, IDs, register addresses, scales and control types are
-preserved. ESPHome 2026.9 normalizes the slash in `Turn off/on status`; check its
-Home Assistant entity when upgrading. Hardware verification is still pending.
+- Standardize YAML indentation, field order, bitmask notation and section comments.
+- Remove unreachable code from the running-state decoder.
+- Connect `device_description` to ESPHome's device comment.
+- Write `Turn off⁄on status` explicitly, matching ESPHome 2026.9's existing
+  normalization and removing the slash deprecation warning.
+
+Resolved entity names on ESPHome 2026.9, IDs, register addresses, scales and control
+types are preserved. Check the status entity when upgrading from older ESPHome.
+Hardware verification is still pending.
