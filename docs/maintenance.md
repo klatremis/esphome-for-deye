@@ -6,7 +6,10 @@
 - Migrate the legacy empty `ota:` entry to the ESPHome OTA platform.
 - Validate and compile the generic ESP32/Arduino example in CI.
 - Preserve entity names, IDs, registers, scaling, and control types.
-- Keep the current filename so existing links remain valid.
+- Keep the historical standalone filename as an automatically generated copy.
+- Separate generic hardware/connectivity from the shared register package.
+- Use configurable 20-second polling and remove ignored `skip_updates` fields.
+- Add package equivalence/override tests and Dependabot update proposals.
 
 Hardware testing of this update is pending. A successful compiler run verifies
 the firmware build, not inverter compatibility or register semantics.
@@ -29,8 +32,8 @@ No existing PR has been merged or closed as part of this review.
 ## Next investigations
 
 - ESPHome 2026.9.0 warns that `skip_updates` has no effect and will be removed in
-  2027.3.0. Review actual register grouping and bus load, then design slower
-  controllers where needed. Keeping the YAML field does not preserve its old behavior.
+  2027.3.0. The ignored fields have been removed and 20-second polling is now
+  explicit. Review bus load on hardware before considering separate slower controllers.
 - ESPHome replaces `/` in `Turn off/on status` with a fraction slash and warns
   this becomes an error in 2027.7.0. Plan an explicit name migration and check
   Home Assistant entity identity before changing it.
@@ -42,8 +45,6 @@ No existing PR has been merged or closed as part of this review.
 - [Issue #26](https://github.com/klatremis/esphome-for-deye/issues/26): the report
   lacks the failing configuration/log context. A build of the checked-in file
   helps distinguish repository errors from local YAML/lambda edits.
-- Separate common Deye registers from hardware profiles while preserving
-  compatibility with installed devices.
 - Track all three low-voltage families listed in the README, with exact model
   and firmware evidence. The maintainer's 20K configuration is a separate
   reference, not proof that every model is tested.

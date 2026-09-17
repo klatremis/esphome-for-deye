@@ -28,7 +28,13 @@ jobs:
         run: python -m pip install -r requirements-dev.txt
       - name: Prepare dummy Wi-Fi credentials
         run: cp tests/secrets.example.yaml secrets.yaml
+      - name: Check standalone configuration is current
+        run: python scripts/sync_legacy.py --check
       - name: Validate configuration
-        run: esphome config "esphome config 10-8-2023.yaml"
+        run: |
+          esphome config deye.yaml
+          esphome config "esphome config 10-8-2023.yaml"
+      - name: Verify package expansion and local overrides
+        run: python tests/check_packages.py
       - name: Compile firmware (no upload)
-        run: esphome compile "esphome config 10-8-2023.yaml"
+        run: esphome compile deye.yaml

@@ -19,50 +19,90 @@ The development dependency is pinned to **ESPHome 2026.9.0**. GitHub Actions
 validates and compiles the generic ESP32/Arduino configuration. A passing build
 does not verify Modbus readings or control behavior on an inverter.
 
-### Known ESPHome 2026.9 warnings
+## Repository layout
 
-- `skip_updates` no longer changes polling frequency. Sensors that previously
-  requested slower polling now use the controller interval (15 seconds here).
-  Check bus behavior on hardware before deploying this version widely. A polling
-  redesign is tracked separately rather than silently changing register grouping.
-- The existing `Turn off/on status` name contains `/`. ESPHome currently replaces
-  this character with a Unicode fraction slash and warns; verify the entity in
-  Home Assistant when upgrading. The source name is retained for this first update.
+| Path | Purpose |
+| --- | --- |
+| `deye.yaml` | Short generic ESP32 configuration and user-adjustable defaults |
+| `packages/deye.yaml` | Shared Deye register definitions and controller |
+| `dashboards/time-of-use.yaml` | Home Assistant card example |
+| `docs/reference/deye-3phase-modbus.docx` | Original Modbus reference document |
+| `esphome config 10-8-2023.yaml` | Generated standalone copy for existing links |
+| `.github/workflows/esphome.yaml` | Automatic validation and firmware compilation |
 
-## Installation
+## Installation using a GitHub package
 
-1. Create an ESP32 device in ESPHome Device Builder and back up its YAML.
-2. Copy [the configuration](<esphome config 10-8-2023.yaml>) into the device's YAML.
-   The historical filename is retained for existing links.
-3. Set `name` to your device name and adjust `device_type`, which prefixes entity
-   names. Keep your existing values when upgrading an installed device.
-4. Select the correct ESP32 board and UART pins. The example uses `esp32dev`,
-   Arduino, TX GPIO17 and RX GPIO16, at 9600 baud.
-5. Add your credentials to ESPHome's `secrets.yaml`:
+Keep a small local YAML in ESPHome Device Builder. The shared configuration is
+fetched from GitHub when ESPHome processes/builds it; repository changes do not
+flash your device automatically. [ESPHome packages documentation](https://esphome.io/components/packages/).
 
-   ```yaml
-   wifi_ssid: "YOUR_WIFI_NAME"
-   wifi_password: "YOUR_WIFI_PASSWORD"
-   ```
+```yaml
+substitutions:
+  name: deye12
+  device_type: sun12k
+  modbus_controller_id: sg04lp3
+  modbus_address: "1"
+  update_interval: 20s
+  esp32_board: esp32dev
+  tx_pin: "17"
+  rx_pin: "16"
 
-6. Keep device-specific API encryption and OTA authentication settings from your
-   existing configuration. Current ESPHome uses:
+packages:
+  deye: github://klatremis/esphome-for-deye/deye.yaml@main
 
-   ```yaml
-   ota:
-     - platform: esphome
-       # password: !secret ota_password
-   ```
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+```
 
-7. Validate and compile in Device Builder. Install by USB for a new device;
+The package files must be present on the selected Git ref. While PR #55 is still
+unmerged, use `@codex/esphome-maintenance` instead of `@main` for preview testing.
+For a deployed installation, replace `@main` with a reviewed commit SHA or a
+published release tag to keep builds reproducible. This update has no release tag
+yet. Change the reference deliberately when upgrading.
+
+1. Back up your current device YAML. Preserve existing `name`, `device_type` and
+   `modbus_controller_id` values when migrating; the example defaults are not a
+   reason to rename an installed device.
+2. Select the board and UART pins appropriate for your ESP32/RS485 adapter. This
+   example uses automatic direction control and Modbus address 1 at 9600 baud.
+3. Store `wifi_ssid` and `wifi_password` in your local `secrets.yaml`.
+4. Keep device-specific API encryption, OTA authentication, hardware startup
+   actions, and other local customizations in your local YAML. Replace the old
+   copied register definitions with the package; do not keep both sets of entities.
+5. Validate and compile in Device Builder. Install by USB for a new device;
    subsequent installations can use OTA when network access is working.
-8. Add the device through the ESPHome integration in Home Assistant. Compare
-   readings with the inverter display before using the controls.
+6. Add the device through Home Assistant's ESPHome integration. Compare readings
+   with the inverter display before using the controls.
 
-For existing installations, preserve device and entity names, custom pins,
-credentials and local changes. This maintenance update retains register
-addresses, scales, entity names, and number/select types. It does not require
-deleting the Home Assistant integration.
+The generic package includes Wi-Fi and an ESP32/Arduino setup. For other hardware
+or networking arrangements, include only `packages/deye.yaml` and supply your own
+hardware/connectivity configuration, a Modbus bus with ID `modbus1`, and the
+`modbus_controller_id`, `modbus_address`, `device_type`, `update_interval`
+substitutions. Hardware and inverter model are independent choices.
+
+### Existing manual installations
+
+The [historical standalone configuration](<esphome config 10-8-2023.yaml>) remains
+available and is generated from the package sources. Existing copied configurations
+continue to work independently; they do not automatically switch to packages.
+For a local repository checkout, `deye.yaml` includes `packages/deye.yaml` directly.
+
+This update preserves entity source names, IDs, register addresses, scales and
+number/select types. Keep your credentials and customizations when upgrading.
+Deleting the Home Assistant integration is not required.
+
+### Polling and upgrade notes
+
+The default is **20 seconds**, adjustable through `update_interval`. ESPHome
+2026.9 ignores `skip_updates`, so those obsolete fields have been removed.
+All register groups follow the controller interval. This differs from older
+ESPHome behavior; check communication logs for timeouts and CRC errors on hardware.
+
+The existing `Turn off/on status` name contains `/`. ESPHome 2026.9 normalizes it
+to a Unicode fraction slash and warns that this becomes an error in 2027.7.0.
+Verify the existing Home Assistant entity after upgrading; a deliberate name
+migration is tracked separately.
 
 ## Hardware
 
@@ -90,7 +130,7 @@ Its GPIO setup differs from this generic example.
 
 ![Home Assistant example](https://user-images.githubusercontent.com/22115157/211201343-1d54cada-4b2c-40b0-88c4-faf31e17fead.png)
 
-The [Time of Use card](<time of use card>) uses the HACS `multiple-entity-row`
+The [Time of Use card](dashboards/time-of-use.yaml) uses the HACS `multiple-entity-row`
 custom card. Adapt the example entity IDs to your installation.
 
 ## Development and automated checks
@@ -101,8 +141,9 @@ environment. From the repository root:
 ```sh
 python -m pip install -r requirements-dev.txt
 # Copy tests/secrets.example.yaml to secrets.yaml for an offline build test.
-esphome config "esphome config 10-8-2023.yaml"
-esphome compile "esphome config 10-8-2023.yaml"
+python scripts/sync_legacy.py --check
+python tests/check_packages.py
+esphome compile deye.yaml
 ```
 
 `tests/secrets.example.yaml` contains dummy Wi-Fi credentials. Do not overwrite
@@ -119,4 +160,7 @@ ESPHome version, ESP32/RS485 hardware, and relevant logs with secrets removed.
 For incorrect readings, include the register and simultaneous inverter display
 value where possible.
 
-See [maintenance notes](docs/maintenance.md) for follow-up work.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the branch, pull request and release workflow,
+[CHANGELOG.md](CHANGELOG.md) for changes, and [maintenance notes](docs/maintenance.md)
+for follow-up work. Dependabot proposes weekly dependency updates after merge;
+updates are tested and reviewed rather than automatically merged.

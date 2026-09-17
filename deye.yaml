@@ -1,0 +1,47 @@
+# Generic ESP32 + automatic-direction RS485 adapter.
+# Override these substitutions in your own device configuration.
+substitutions:
+  name: deye12
+  device_description: "Esphome component for Deye sun-12k-sg04lp3"
+  device_type: sun12k
+  modbus_controller_id: sg04lp3
+  modbus_address: "1"
+  update_interval: 20s
+  esp32_board: esp32dev
+  tx_pin: "17"
+  rx_pin: "16"
+
+esphome:
+  name: ${name}
+
+esp32:
+  board: ${esp32_board}
+  framework:
+    type: arduino
+
+logger:
+api:
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+  ap:
+    ssid: ${name}
+
+captive_portal:
+
+uart:
+  id: mod_bus
+  tx_pin: ${tx_pin}
+  rx_pin: ${rx_pin}
+  baud_rate: 9600
+  stop_bits: 1
+
+modbus:
+  id: modbus1
+  # For an adapter requiring direction control, configure flow_control_pin here.
+
+packages:
+  deye: !include packages/deye.yaml
